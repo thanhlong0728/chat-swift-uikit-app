@@ -34,7 +34,7 @@ class SignInViewController: UIViewController {
         registerKeyboardNotification()
         let backgroundTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(backgroundTap)
-        
+      
     }
     
     override func viewDidLayoutSubviews() {

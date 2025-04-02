@@ -10,6 +10,8 @@
 		0408AA932D9CC8B4005188F3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0408AA922D9CC8B4005188F3 /* FirebaseMessaging */; };
 		0408AA962D9D22FA005188F3 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0408AA952D9D22FA005188F3 /* Extension+UIViewController.swift */; };
 		0408AA982D9D277E005188F3 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 0408AA972D9D277E005188F3 /* FirebaseDatabase */; };
+		0408AA9D2D9D9067005188F3 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0408AA9C2D9D9067005188F3 /* LoadingView.xib */; };
+		0408AA9F2D9D90AB005188F3 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0408AA9E2D9D90AB005188F3 /* LoadingView.swift */; };
 		04B1E5822D9C2672009F988E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B1E5812D9C2672009F988E /* GoogleService-Info.plist */; };
 		04B1E5862D9C4141009F988E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 04B1E5852D9C4141009F988E /* FirebaseAuth */; };
 		04B1E5882D9C4146009F988E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 04B1E5872D9C4146009F988E /* FirebaseFirestore */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		0408AA952D9D22FA005188F3 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
+		0408AA9C2D9D9067005188F3 /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		0408AA9E2D9D90AB005188F3 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		04B1E5812D9C2672009F988E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E12D57D62A6B3FD600D556EF /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		E12D58052A6CAE8F00D556EF /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
@@ -71,6 +75,16 @@
 				0408AA952D9D22FA005188F3 /* Extension+UIViewController.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0408AA9B2D9D9046005188F3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E12D57D62A6B3FD600D556EF /* PrimaryButton.swift */,
+				0408AA9C2D9D9067005188F3 /* LoadingView.xib */,
+				0408AA9E2D9D90AB005188F3 /* LoadingView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		04B1E5842D9C4141009F988E /* Frameworks */ = {
@@ -136,9 +150,9 @@
 		E13089CB2A69FFEF00C1889D /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				0408AA9B2D9D9046005188F3 /* Components */,
 				E13089C32A69F24800C1889D /* Font.swift */,
 				E13089C12A69F02200C1889D /* Colors.xcassets */,
-				E12D57D62A6B3FD600D556EF /* PrimaryButton.swift */,
 				E12D58052A6CAE8F00D556EF /* Extension+UIColor.swift */,
 			);
 			path = Design;
@@ -212,6 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0408AA9D2D9D9067005188F3 /* LoadingView.xib in Resources */,
 				E13089C22A69F02200C1889D /* Colors.xcassets in Resources */,
 				E13089BC2A69EE7C00C1889D /* Auth.storyboard in Resources */,
 				E13089B42A69EDBB00C1889D /* LaunchScreen.storyboard in Resources */,
@@ -231,6 +246,7 @@
 				E13089C82A69FC1700C1889D /* CreateAccountViewController.swift in Sources */,
 				E13089C42A69F24800C1889D /* Font.swift in Sources */,
 				E13089A82A69EDB600C1889D /* AppDelegate.swift in Sources */,
+				0408AA9F2D9D90AB005188F3 /* LoadingView.swift in Sources */,
 				E13089C62A69FBF400C1889D /* SignInViewController.swift in Sources */,
 				E12D57D72A6B3FD600D556EF /* PrimaryButton.swift in Sources */,
 				0408AA962D9D22FA005188F3 /* Extension+UIViewController.swift in Sources */,

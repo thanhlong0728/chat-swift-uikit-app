@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0408AA932D9CC8B4005188F3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0408AA922D9CC8B4005188F3 /* FirebaseMessaging */; };
 		04B1E5822D9C2672009F988E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B1E5812D9C2672009F988E /* GoogleService-Info.plist */; };
 		04B1E5862D9C4141009F988E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 04B1E5852D9C4141009F988E /* FirebaseAuth */; };
 		04B1E5882D9C4146009F988E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 04B1E5872D9C4146009F988E /* FirebaseFirestore */; };
@@ -50,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0408AA932D9CC8B4005188F3 /* FirebaseMessaging in Frameworks */,
 				04B1E5862D9C4141009F988E /* FirebaseAuth in Frameworks */,
 				04B1E5882D9C4146009F988E /* FirebaseFirestore in Frameworks */,
 				04B1E58A2D9C414E009F988E /* FirebaseStorage in Frameworks */,
@@ -149,6 +151,7 @@
 				04B1E5852D9C4141009F988E /* FirebaseAuth */,
 				04B1E5872D9C4146009F988E /* FirebaseFirestore */,
 				04B1E5892D9C414E009F988E /* FirebaseStorage */,
+				0408AA922D9CC8B4005188F3 /* FirebaseMessaging */,
 			);
 			productName = ChatApp;
 			productReference = E13089A42A69EDB600C1889D /* ChatApp.app */;
@@ -455,6 +458,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0408AA922D9CC8B4005188F3 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04B1E5832D9C27C6009F988E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		04B1E5852D9C4141009F988E /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 04B1E5832D9C27C6009F988E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

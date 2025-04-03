@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jb9-VD-yjj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jb9-VD-yjj">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -24,6 +23,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEx-7v-pme">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                         <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signinSplash" translatesAutoresizingMaskIntoConstraints="NO" id="KHt-4x-GY3">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                            </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ONf-9R-ZEs">
                                                 <rect key="frame" x="0.0" y="404" width="393" height="448"/>
                                                 <subviews>
@@ -61,7 +63,7 @@
                                                             <constraint firstAttribute="height" constant="45" id="oKH-y1-NpB"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-Or-Vdg" customClass="PrimaryButton" customModule="ChatApp" customModuleProvider="target">
                                                         <rect key="frame" x="25" y="328" width="343" height="45"/>
@@ -118,7 +120,11 @@
                                         </subviews>
                                         <color key="backgroundColor" name="primary"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="KHt-4x-GY3" secondAttribute="trailing" id="CCv-jg-jmc"/>
                                             <constraint firstAttribute="trailing" secondItem="ONf-9R-ZEs" secondAttribute="trailing" id="Mm4-uS-go4"/>
+                                            <constraint firstItem="KHt-4x-GY3" firstAttribute="leading" secondItem="jEx-7v-pme" secondAttribute="leading" id="Ndy-Ze-ZAx"/>
+                                            <constraint firstItem="KHt-4x-GY3" firstAttribute="top" secondItem="jEx-7v-pme" secondAttribute="top" id="cHx-Ye-wCt"/>
+                                            <constraint firstAttribute="bottom" secondItem="KHt-4x-GY3" secondAttribute="bottom" id="fqG-Bj-tpR"/>
                                             <constraint firstItem="ONf-9R-ZEs" firstAttribute="leading" secondItem="jEx-7v-pme" secondAttribute="leading" id="goy-29-qh5"/>
                                             <constraint firstAttribute="bottom" secondItem="ONf-9R-ZEs" secondAttribute="bottom" id="oZr-7X-VqR"/>
                                         </constraints>
@@ -150,7 +156,7 @@
                     <connections>
                         <outlet property="containerView" destination="ONf-9R-ZEs" id="39G-7F-ree"/>
                         <outlet property="contentView" destination="jEx-7v-pme" id="VyN-KG-7d3"/>
-                        <outlet property="createAccountTextView" destination="r2H-GM-Eof" id="14i-7H-BYG"/>
+                        <outlet property="createAccountTextView" destination="r2H-GM-Eof" id="fib-7b-Xmy"/>
                         <outlet property="emailTextField" destination="bkI-KA-IaK" id="TVx-an-q9M"/>
                         <outlet property="passwordTextField" destination="U0s-hE-Sa0" id="fzf-Xm-WKd"/>
                         <outlet property="scrollView" destination="EXu-4M-0Db" id="c9A-pu-DHQ"/>
@@ -175,6 +181,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Th-oj-zrg">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                         <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginSplash" translatesAutoresizingMaskIntoConstraints="NO" id="BYb-x8-pgk">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                            </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kh9-sR-lOW">
                                                 <rect key="frame" x="0.0" y="298.33333333333331" width="393" height="553.66666666666674"/>
                                                 <subviews>
@@ -291,8 +300,12 @@
                                         <viewLayoutGuide key="safeArea" id="NZh-DC-NYB"/>
                                         <color key="backgroundColor" name="primary"/>
                                         <constraints>
+                                            <constraint firstItem="BYb-x8-pgk" firstAttribute="bottom" secondItem="0Th-oj-zrg" secondAttribute="bottom" id="5kD-nb-lAt"/>
                                             <constraint firstAttribute="bottom" secondItem="Kh9-sR-lOW" secondAttribute="bottom" id="UtP-hF-QFn"/>
+                                            <constraint firstItem="BYb-x8-pgk" firstAttribute="trailing" secondItem="NZh-DC-NYB" secondAttribute="trailing" id="lm8-Rc-X4O"/>
+                                            <constraint firstItem="BYb-x8-pgk" firstAttribute="top" secondItem="0Th-oj-zrg" secondAttribute="top" id="nOT-iv-s28"/>
                                             <constraint firstAttribute="trailing" secondItem="Kh9-sR-lOW" secondAttribute="trailing" id="sNK-Ly-14g"/>
+                                            <constraint firstItem="BYb-x8-pgk" firstAttribute="leading" secondItem="NZh-DC-NYB" secondAttribute="leading" id="zPa-Za-TgO"/>
                                             <constraint firstItem="Kh9-sR-lOW" firstAttribute="leading" secondItem="0Th-oj-zrg" secondAttribute="leading" id="zlS-Ku-mQU"/>
                                         </constraints>
                                     </view>
@@ -326,7 +339,7 @@
                         <outlet property="emailTextField" destination="U27-fO-LVb" id="yEN-kf-Xa9"/>
                         <outlet property="passwordTextField" destination="n1P-S2-cyT" id="Vwr-SM-70L"/>
                         <outlet property="scrollView" destination="tRf-iC-KCn" id="eOD-M4-fyL"/>
-                        <outlet property="signinAccountTextView" destination="dUV-1w-EZU" id="uek-Ds-QTv"/>
+                        <outlet property="signinAccountTextView" destination="dUV-1w-EZU" id="QvM-jY-EL7"/>
                         <outlet property="usernameTextField" destination="zpS-0l-HyM" id="UYD-4q-hii"/>
                         <segue destination="jb9-VD-yjj" kind="presentation" identifier="SignInSegue" id="XhJ-le-tAe"/>
                     </connections>
@@ -337,11 +350,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="loginSplash" width="2000" height="3000"/>
+        <image name="signinSplash" width="1728" height="2592"/>
         <namedColor name="primary">
             <color red="0.25499999523162842" green="0.25099998712539673" blue="0.45100000500679016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -14,6 +14,8 @@ class Font {
     static let chatLabel = UIFont.systemFont(ofSize: UIFontMetrics.default.scaledValue(for: 14), weight: .medium)
     static let caption = UIFont.systemFont(ofSize: UIFontMetrics.default.scaledValue(for: 14))
     static let linkLabel = UIFont.systemFont(ofSize: UIFontMetrics.default.scaledValue(for: 14), weight: .semibold)
+    static let listTitle = UIFont.systemFont(ofSize: UIFontMetrics.default.scaledValue(for: 16), weight: .semibold)
+    static let listSubTitle = UIFont.systemFont(ofSize: UIFontMetrics.default.scaledValue(for: 14), weight: .regular)
     
 }
 

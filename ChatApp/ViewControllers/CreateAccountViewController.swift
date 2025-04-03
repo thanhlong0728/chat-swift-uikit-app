@@ -24,8 +24,8 @@ class CreateAccountViewController: UIViewController {
         super.viewDidLoad()
         containerView.clipsToBounds = true
         containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        let attributedString = NSMutableAttributedString(string: "Already have an account? Sign in here", attributes: [.font: Font.caption])
-        attributedString.addAttribute(.link, value: "chatappcreate://createAccount", range: (attributedString.string as NSString).range(of: "Sign in here"))
+        let attributedString = NSMutableAttributedString(string: "Already have an account? Sign in here.", attributes: [.font: Font.caption])
+        attributedString.addAttribute(.link, value: "chatappcreate://createAccount", range: (attributedString.string as NSString).range(of: "Sign in here."))
         signinAccountTextView.attributedText = attributedString
         signinAccountTextView.linkTextAttributes = [.foregroundColor: UIColor.secondary, .font: Font.linkLabel]
         signinAccountTextView.delegate = self
@@ -37,26 +37,35 @@ class CreateAccountViewController: UIViewController {
         passwordTextField.delegate = self
         let backgroundTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(backgroundTap)
+        
+        containerView.backgroundColor = UIColor.clear
+        signinAccountTextView.backgroundColor = UIColor.clear
+        let blurEffect = UIBlurEffect(style: .light)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        visualEffectView.frame = view.bounds
+        containerView.addSubview(visualEffectView)
+        containerView.sendSubviewToBack(visualEffectView)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        registerKeyboardNotification()
+        registerKeyboardNotifications()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         removeKeyboardNotifications()
     }
     
-    func registerKeyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name: UIWindow.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification: )), name: UIWindow.keyboardDidHideNotification, object: nil)
+    func registerKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIWindow.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIWindow.keyboardWillHideNotification, object: nil)
     }
     
     func removeKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardDidHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,27 +73,26 @@ class CreateAccountViewController: UIViewController {
         containerView.layer.cornerRadius = 20
     }
     
-    @objc func keyboardWillShow(notification: NSNotification){
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
             return
         }
-        
         let keyboardOffset = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
         let totalOffset = activeTextField == nil ? keyboardOffset : keyboardOffset + activeTextField!.frame.height
         scrollView.contentInset.bottom = totalOffset
     }
     
-    @objc func dismissKeyboard(){
-        view.endEditing(true)
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification){
+    @objc func keyboardWillHide(notification: NSNotification) {
         scrollView.contentInset.bottom = 0
     }
     
     @IBAction func createAccountButtonTapped(_ sender: Any) {
-        guard let username = usernameTextField.text else{
-           presentErrorAlert(title: "Username Required", message: "Please enter a username to continue.")
+        guard let username = usernameTextField.text else {
+            presentErrorAlert(title: "Username Required", message: "Please enter a username to continue.")
             return
         }
         guard username.count >= 1 && username.count <= 15 else {
@@ -95,20 +103,24 @@ class CreateAccountViewController: UIViewController {
             presentErrorAlert(title: "Password Required", message: "Please enter a password to continue.")
             return
         }
-        guard let email = emailTextField.text else { 
+        guard let email = emailTextField.text else {
             presentErrorAlert(title: "Email Required", message: "Please enter an email to continue.")
             return
         }
+
+        
         showLoadingView()
-        checkIfExists(username: username) { usernameExists in
+        
+        checkIfExists(username: username) { [weak self] usernameExists in
+            guard let strongSelf = self else { return }
             if !usernameExists {
-                self.createUser(username: username, email: email, password: password) { result, error in
+                strongSelf.createUser(username: username, email: email, password: password) { result, error in
                     if let error = error {
-                        self.presentErrorAlert(title: "Create Account Failed", message: error)
+                        strongSelf.presentErrorAlert(title: "Create Account Failed", message: error)
                         return
                     }
                     guard let result = result else {
-                        self.presentErrorAlert(title: "Create Account Failed", message: "Please try again later")
+                        strongSelf.presentErrorAlert(title: "Create Account Failed", message: "Please try again later")
                         return
                     }
                     let userId = result.user.uid
@@ -126,22 +138,20 @@ class CreateAccountViewController: UIViewController {
                     let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     let homeVC = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
                     let navVC = UINavigationController(rootViewController: homeVC)
-                    let window = UIApplication.shared.connectedScenes.flatMap {($0 as? UIWindowScene)?.windows ?? []}.first {$0.isKeyWindow}
+                    let window = UIApplication.shared.connectedScenes.flatMap { ($0 as? UIWindowScene)?.windows ?? [] }.first { $0.isKeyWindow }
                     window?.rootViewController = navVC
                 }
             } else {
-                self.presentErrorAlert(title: "Username Is Use", message: "Please try a different username")
-                self.removeLoadingView()
+                strongSelf.presentErrorAlert(title: "Username In Use", message: "Please try a different username")
+                strongSelf.removeLoadingView()
             }
         }
         
     }
     
-    func checkIfExists(username: String, completion: @escaping (_ result: Bool) -> Void)  {
+    func checkIfExists(username: String, completion: @escaping (_ result: Bool) -> Void) {
         Database.database().reference().child("usernames").child(username).observeSingleEvent(of: .value) { snapshot in
             guard !snapshot.exists() else {
-                self.presentErrorAlert(title: "Username In Use", message: "Please try a different username")
-                self.removeLoadingView()
                 completion(true)
                 return
             }
@@ -149,18 +159,19 @@ class CreateAccountViewController: UIViewController {
         }
     }
     
-    func createUser(username: String ,email: String, password: String, completion: @escaping (_ result: AuthDataResult?,_ error: String?) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            self.removeLoadingView()
+    func createUser(username: String, email: String, password: String, completion: @escaping (_ result: AuthDataResult?, _ error: String?) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+            guard let strongSelf = self else { return }
+            strongSelf.removeLoadingView()
             if let error = error {
                 print(error.localizedDescription)
                 var errorMessage = "Something went wrong. Please try again later."
                 if let authError = AuthErrorCode(rawValue: error._code) {
                     switch authError {
                     case .emailAlreadyInUse:
-                        errorMessage = "Email already is use"
+                        errorMessage = "Email already in use."
                     case .invalidEmail:
-                        errorMessage = "Invalid Email"
+                        errorMessage = "Invalid email"
                     case .weakPassword:
                         errorMessage = "Weak password"
                     default:
@@ -168,7 +179,6 @@ class CreateAccountViewController: UIViewController {
                     }
                 }
                 completion(nil, errorMessage)
-
                 return
             }
             guard let result = result else {
@@ -178,6 +188,8 @@ class CreateAccountViewController: UIViewController {
             completion(result, nil)
         }
     }
+    
+
 }
 
 extension CreateAccountViewController: UITextViewDelegate {
@@ -192,6 +204,7 @@ extension CreateAccountViewController: UITextViewDelegate {
 }
 
 extension CreateAccountViewController: UITextFieldDelegate {
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
     }
@@ -199,4 +212,5 @@ extension CreateAccountViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeTextField = nil
     }
+    
 }
